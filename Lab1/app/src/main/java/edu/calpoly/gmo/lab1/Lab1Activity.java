@@ -15,11 +15,15 @@ public class Lab1Activity extends AppCompatActivity {
 
         TextView name = (TextView) findViewById(R.id.name);
         TextView description = (TextView) findViewById(R.id.description);
-        //ImageView image = (ImageView) findViewById(R.id.image);
+        ImageView image = (ImageView) findViewById(R.id.me);
 
         name.setText("Genton Mo");
 
-        description.setText("This is a description of myself.");
-        description.setY(name.getY() + 50);
+        description.setText("I'm a fifth year Computer Engineering major " +
+                "from Alhambra, CA, which is about 10 miles east of LA. " +
+                "After graduating, I hope to become a mobile developer. " +
+                "On my free time, I enjoy eating, going to the gym, and " +
+                "playing board games.");
+        description.setY(name.getY() + 75);
     }
 }

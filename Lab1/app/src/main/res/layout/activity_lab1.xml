@@ -18,10 +18,11 @@
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
-    <ImageView
-        android:src="@drawable/sample"
+   <ImageView
+       android:id="@+id/me"
+        android:src="@drawable/me"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 </RelativeLayout>
