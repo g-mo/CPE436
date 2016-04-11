@@ -128,6 +128,7 @@ public class AdvancedJokeList extends AppCompatActivity {
 		rootView.addView(scrollView);
 
 		setContentView(rootView);
+
 	}
 
 	/**
@@ -156,12 +157,12 @@ public class AdvancedJokeList extends AppCompatActivity {
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				String temp = m_vwJokeEditText.getText().toString();
-				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+				if (event.getAction() == KeyEvent.ACTION_UP) {
 					if (keyCode == KeyEvent.KEYCODE_ENTER
 							|| keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 						if (temp != null && !(temp.equals(""))) {
-							m_vwJokeEditText.setText("");
 							addJoke(new Joke(temp, m_strAuthorName));
+							m_vwJokeEditText.setText("");
 							InputMethodManager imm = (InputMethodManager)
 									getSystemService(Context.INPUT_METHOD_SERVICE);
 
