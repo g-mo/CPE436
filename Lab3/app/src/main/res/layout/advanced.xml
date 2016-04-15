@@ -14,11 +14,9 @@ Note: You must use the following id's for this list of UI Components defined in
      errors.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    layout_width="wrap_content"
-    layout_height="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,18 +36,11 @@ Note: You must use the following id's for this list of UI Components defined in
             android:inputType="text"/>
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/jokeListViewGroup"
-            >
-
-        </LinearLayout>
-    </ScrollView>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/jokeListViewGroup">
+    </ListView>
 
 </LinearLayout>

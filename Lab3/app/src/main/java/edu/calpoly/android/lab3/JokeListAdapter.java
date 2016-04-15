@@ -32,26 +32,35 @@ public class JokeListAdapter extends BaseAdapter {
 	 *            is bound.
 	 */
 	public JokeListAdapter(Context context, List<Joke> jokeList) {
-		//TODO
+		m_context = context;
+		m_jokeList = jokeList;
 	}
 
 	@Override
 	public int getCount() {
-		return 0;
+		return m_jokeList.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return null;
+		return m_jokeList.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		return null;
+		if (convertView == null) {
+			return new JokeView(m_context, m_jokeList.get(position));
+		}
+
+		else {
+//			((JokeView) convertView).setJoke(m_jokeList.get(position));
+//			return convertView;
+			return new JokeView(m_context, m_jokeList.get(position));
+		}
 	}
 }

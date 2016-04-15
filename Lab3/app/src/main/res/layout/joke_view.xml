@@ -16,33 +16,37 @@ Note: You must use the following id's for this list of UI Components defined in
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content" >
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This is a really long text that will hopefully cover three lines so there will be enough vertical space. This will take up more space."
         android:id="@+id/jokeTextView"
-        android:layout_marginRight="80dp"/>
+        android:layout_weight="10"
+        android:padding="9dp"
+        android:textSize="16dp"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:id="@+id/ratingRadioGroup">
 
         <RadioButton
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/like"
-            android:checked="false" />
+            android:id="@+id/likeButton"/>
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/dislike"
-            android:checked="false"/>
+            android:id="@+id/dislikeButton"/>
 
     </RadioGroup>
 
