@@ -38,7 +38,7 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 	 */
 	@SmallTest
 	public void testDeleteDefaultJokes(){
-		/*Menu menu = null;
+		Menu menu = null;
 		ArrayList<Joke> type = null;
 		JokeListAdapter jla_type = null;
 		final ArrayList<Joke> m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", type,
@@ -114,7 +114,7 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 		getInstrumentation().waitForIdleSync();
 		assertEquals("Should be 0 jokes in the list", 0, m_arrFilteredJokeList.size());
 		assertEquals("Should be 0 jokes in the base list too", 0, m_arrJokeList.size());
-		*/
+
 	}
 	
 	/**
@@ -185,7 +185,7 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 	 */
 	@SmallTest
 	public void testDeleteRateFilterNewDefaultJokes(){
-		/*Menu menu = null;
+		Menu menu = null;
 		ArrayList<Joke> type = null;
 		JokeListAdapter jla_type = null;
 		final ArrayList<Joke> m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", type,
@@ -306,7 +306,6 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 		assertEquals("Joke 1 should be a default one", "I wondered why the baseball was getting bigger. Then it hit me.", m_arrFilteredJokeList.get(0).getJoke());
 		assertEquals("Joke 2 should be an added joke", "This is a test joke", m_arrFilteredJokeList.get(1).getJoke());
 		assertEquals("Joke 3 should be an added joke", "This is another test joke", m_arrFilteredJokeList.get(2).getJoke());
-		*/
 	}
 
 	/*************************************/
@@ -314,7 +313,7 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 	/*************************************/
 	@SuppressWarnings("unchecked")
 	public <T> T retrieveHiddenMember(String memberName, T type, Object sourceObj) {
-		/*Field field = null;
+		Field field = null;
 		T returnVal = null;
 		//Test for proper existence
 		try {
@@ -338,8 +337,7 @@ public class AdvancedJokeListAddFilterDeleteTest extends ActivityInstrumentation
 		} catch (IllegalAccessException e) {
 			fail ("This is an Error caused by the UnitTest!\n Improper user of retrieveHiddenMember(...) -- IllegalAccessException:\n Field.setAccessible(true) should be called.");
 		}
-		return returnVal; */
-		return null;
+		return returnVal;
 	}
 
 

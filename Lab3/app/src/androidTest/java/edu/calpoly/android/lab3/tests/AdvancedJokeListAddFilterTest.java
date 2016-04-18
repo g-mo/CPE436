@@ -185,7 +185,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 	 */
 	@SmallTest
 	public void testRateLikeDefaultJokes() {
-		/*ArrayList<Joke> m_arrFilteredJokeList = null;
+		ArrayList<Joke> m_arrFilteredJokeList = null;
 		m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", m_arrFilteredJokeList,
 			getActivity());
 		assertEquals("Should be 3 default jokes", 3, m_arrFilteredJokeList.size());
@@ -222,7 +222,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 		JokeView jv2 = (JokeView)m_jokeAdapter.getView(1, null, null);
 		RadioGroup m_vwLikeGroup2 = (RadioGroup)jv2.findViewById(R.id.ratingRadioGroup);
 		assertEquals("Check Unrated", m_vwLikeGroup2.getCheckedRadioButtonId(), -1);
-		*/
+
 	}
 	
 	/**
@@ -230,7 +230,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 	 */
 	@SmallTest
 	public void testRateFilterDislikeDefaultJokes() {
-		/*ArrayList<Joke> m_arrFilteredJokeList = null;
+		ArrayList<Joke> m_arrFilteredJokeList = null;
 		m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", m_arrFilteredJokeList,
 			getActivity());
 		assertEquals("Should be 3 default jokes", 3, m_arrFilteredJokeList.size());
@@ -281,7 +281,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 		// wait for the request to go through
 		getInstrumentation().waitForIdleSync();
 		assertEquals("Should be 1 joke in the list", 1, m_arrFilteredJokeList.size());
-		*/
+
 	}
 	
 	/**
@@ -289,7 +289,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 	 */
 	@SmallTest
 	public void testAddRateNewJokes() {
-		/*
+
 		ArrayList<Joke> m_arrFilteredJokeList = null;
 		m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", m_arrFilteredJokeList,
 			getActivity());
@@ -415,7 +415,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 		// wait for the request to go through
 		getInstrumentation().waitForIdleSync();
 		assertEquals("Should be 14 jokes in the list", 14, m_arrFilteredJokeList.size());
-		*/
+
 	}
 	
 	/**
@@ -423,7 +423,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 	 */
 	@SmallTest
 	public void testAddRateNewJokeAfterFiltering() {
-		/*
+
 		ArrayList<Joke> m_arrFilteredJokeList = null;
 		m_arrFilteredJokeList = this.retrieveHiddenMember("m_arrFilteredJokeList", m_arrFilteredJokeList,
 			getActivity());
@@ -526,7 +526,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 		assertEquals("3rd joke is still the same", "I wondered why the baseball was getting bigger. Then it hit me.", m_arrFilteredJokeList.get(2).getJoke());
 		assertEquals("4th joke is new", "This is a test joke", m_arrFilteredJokeList.get(3).getJoke());
 		assertEquals("5th joke is new", "This is a second test joke", m_arrFilteredJokeList.get(4).getJoke());
-		*/
+
 	}
 
 	/*************************************/
@@ -534,7 +534,7 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 	/*************************************/
 	@SuppressWarnings("unchecked")
 	public <T> T retrieveHiddenMember(String memberName, T type, Object sourceObj) {
-		/*Field field = null;
+		Field field = null;
 		T returnVal = null;
 		//Test for proper existence
 		try {
@@ -559,8 +559,6 @@ public class AdvancedJokeListAddFilterTest extends ActivityInstrumentationTestCa
 			fail ("This is an Error caused by the UnitTest!\n Improper user of retrieveHiddenMember(...) -- IllegalAccessException:\n Field.setAccessible(true) should be called.");
 		}
 		return returnVal;
-		*/
-		return null;
 	}
 
 

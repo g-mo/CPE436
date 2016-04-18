@@ -4,18 +4,25 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,7 +41,7 @@ public class AdvancedJokeList extends AppCompatActivity {
 	protected JokeListAdapter m_jokeAdapter;
 
 	/** ViewGroup used for maintaining a list of Views that each display Jokes. */
-	protected LinearLayout m_vwJokeLayout;
+	protected ListView m_vwJokeLayout;
 
 	/** EditText used for entering text for a new Joke to be added to m_arrJokeList. */
 	protected EditText m_vwJokeEditText;
@@ -58,17 +65,19 @@ public class AdvancedJokeList extends AppCompatActivity {
 	 * IMPORTANT: You must use these when creating your MenuItems or the tests
 	 * used to grade your submission will fail. These are commented out for now.
 	 */
-	//protected static final int FILTER = Menu.FIRST;
-	//protected static final int FILTER_LIKE = SubMenu.FIRST;
-	//protected static final int FILTER_DISLIKE = SubMenu.FIRST + 1;
-	//protected static final int FILTER_UNRATED = SubMenu.FIRST + 2;
-	//protected static final int FILTER_SHOW_ALL = SubMenu.FIRST + 3;
+	protected static final int FILTER = Menu.FIRST;
+	protected static final int FILTER_LIKE = SubMenu.FIRST;
+	protected static final int FILTER_DISLIKE = SubMenu.FIRST + 1;
+	protected static final int FILTER_UNRATED = SubMenu.FIRST + 2;
+	protected static final int FILTER_SHOW_ALL = SubMenu.FIRST + 3;
+
+	private android.support.v7.view.ActionMode actionMode;
+	private android.support.v7.view.ActionMode.Callback callback;
+	private int removePos;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initLayout();
-		initAddJokeListeners();
 		Resources resources = this.getResources();
 
 		m_nDarkColor = resources.getColor(R.color.dark);
@@ -76,6 +85,11 @@ public class AdvancedJokeList extends AppCompatActivity {
 		m_nTextColor = resources.getColor(R.color.text);
 		m_strAuthorName = resources.getString(R.string.author_name);
 		m_arrJokeList = new ArrayList<Joke>();
+		m_arrFilteredJokeList = new ArrayList<Joke>();
+		m_jokeAdapter = new JokeListAdapter(this, m_arrFilteredJokeList);
+
+		initLayout();
+		initAddJokeListeners();
 
 		String strArr[] = resources.getStringArray(R.array.jokeList);
 		for (String string : strArr) {
@@ -86,49 +100,97 @@ public class AdvancedJokeList extends AppCompatActivity {
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // TODO
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.mainmenu, menu);
+		m_vwMenu = menu;
         return true;
     }
+
+	private void populateFilteredArrayList(int rating) {
+		for (Joke joke : m_arrJokeList)
+			if (joke.getRating() == rating)
+				m_arrFilteredJokeList.add(joke);
+		m_jokeAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		m_arrFilteredJokeList.clear();
+
+		switch (item.getItemId()) {
+			case R.id.submenu_like:
+				populateFilteredArrayList(Joke.LIKE);
+				break;
+
+			case R.id.submenu_dislike:
+				populateFilteredArrayList(Joke.DISLIKE);
+				break;
+
+			case R.id.submenu_unrated:
+				populateFilteredArrayList(Joke.UNRATED);
+				break;
+
+			case R.id.submenu_show_all:
+				for (Joke joke : m_arrJokeList)
+					m_arrFilteredJokeList.add(joke);
+				m_jokeAdapter.notifyDataSetChanged();
+				break;
+
+			default:
+				break;
+		}
+		return true;
+	}
 
 	/**
 	 * Method is used to encapsulate the code that initializes and sets the
 	 * Layout for this Activity.
 	 */
 	protected void initLayout() {
-		/*setContentView(R.layout.advanced);
+		setContentView(R.layout.advanced);
 
-		m_vwJokeLayout = (LinearLayout) findViewById(R.id.jokeListViewGroup);
+		m_vwJokeLayout = (ListView) findViewById(R.id.jokeListViewGroup);
 		m_vwJokeButton = (Button) findViewById(R.id.addJokeButton);
 		m_vwJokeEditText = (EditText) findViewById(R.id.newJokeEditText);
-		*/
-		LinearLayout rootView = new LinearLayout(this);
-		rootView.setOrientation(LinearLayout.VERTICAL);
+		m_vwJokeLayout.setAdapter(m_jokeAdapter);
+		callback = new ActionMode.Callback() {
 
-		LinearLayout jokeButtonView = new LinearLayout(this);
-		m_vwJokeButton = new Button(this);
-		m_vwJokeButton.setText("Add Joke");
-		jokeButtonView.addView(m_vwJokeButton);
+			// Called when the action mode is created; startActionMode() was called
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				// Inflate a menu resource providing context menu items
+				MenuInflater inflater = mode.getMenuInflater();
+				inflater.inflate(R.menu.actionmenu, menu);
+				return true;
+			}
 
-		m_vwJokeEditText = new EditText(this);
+			// Called each time the action mode is shown. Always called after onCreateActionMode, but
+			// may be called multiple times if the mode is invalidated.
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false; // Return false if nothing is done
+			}
 
-		m_vwJokeEditText.setLayoutParams(new LinearLayout.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));
-		m_vwJokeEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-		m_vwJokeEditText.setText("");
-		jokeButtonView.addView(m_vwJokeEditText);
+			// Called when the user selects a contextual menu item
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				switch (item.getItemId()) {
+					case R.id.menu_remove:
+						m_arrJokeList.remove(m_arrFilteredJokeList.remove(removePos));
+						m_jokeAdapter.notifyDataSetChanged();
+						mode.finish(); // Action picked, so close the CAB
+						return true;
+					default:
+						return false;
+				}
+			}
+			// Called when the user exits the action mode
 
-		m_vwJokeLayout = new LinearLayout(this);
-		m_vwJokeLayout.setOrientation(LinearLayout.VERTICAL);
-
-		ScrollView scrollView = new ScrollView(this);
-		scrollView.addView(m_vwJokeLayout);
-
-		rootView.addView(jokeButtonView);
-		rootView.addView(scrollView);
-
-		setContentView(rootView);
-
+			@Override
+			public void onDestroyActionMode (ActionMode mode){
+				actionMode = null;
+			}
+		};
 	}
 
 	/**
@@ -175,6 +237,17 @@ public class AdvancedJokeList extends AppCompatActivity {
 				return false;
 			}
 		});
+
+		m_vwJokeLayout.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+				removePos = position;
+				actionMode = startSupportActionMode(callback);
+
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -187,12 +260,7 @@ public class AdvancedJokeList extends AppCompatActivity {
 	protected void addJoke(Joke joke) {
 
 		m_arrJokeList.add(joke);
-		TextView tv = new TextView(this);
-		tv.setText(joke.getJoke());
-		tv.setTextSize(16);
-		tv.setBackgroundColor(colorTracker ? m_nDarkColor : m_nLightColor);
-		tv.setTextColor(m_nTextColor);
-		colorTracker = !colorTracker;
-		m_vwJokeLayout.addView(tv);
+		m_arrFilteredJokeList.add(joke);
+		m_jokeAdapter.notifyDataSetChanged();
 	}
 }

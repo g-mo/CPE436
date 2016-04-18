@@ -14,4 +14,40 @@ Note: You must use the following id's for this list of UI Components defined in
 	 This Root element is only here as a place holder to prevent compilation
      errors.
 -->
-<LinearLayout></LinearLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/jokeTextView"
+        android:layout_weight="10"
+        android:padding="9dp"
+        android:textSize="16dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end"
+        android:id="@+id/ratingRadioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:background="@drawable/like"
+            android:id="@+id/likeButton"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:background="@drawable/dislike"
+            android:id="@+id/dislikeButton"/>
+
+    </RadioGroup>
+
+</LinearLayout>

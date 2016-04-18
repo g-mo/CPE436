@@ -38,6 +38,7 @@ public class AdvancedJokeListTest2 extends ActivityInstrumentationTestCase2<Adva
 			});
 		// wait for the request to go through
 		getInstrumentation().waitForIdleSync();
+
 		assertEquals("Should be 4 jokes now", 4, m_arrJokeList.size());
 		assertEquals("Ensure the joke we added is really there", "This is a test joke", m_arrJokeList.get(3).getJoke());	
 		ListView m_vwJokeLayout = null;
@@ -108,7 +109,7 @@ public class AdvancedJokeListTest2 extends ActivityInstrumentationTestCase2<Adva
 
 	@SmallTest
 	public void testCheckLike() {
-		/*ListView m_vwJokeLayout = null;
+		ListView m_vwJokeLayout = null;
 		m_vwJokeLayout = this.retrieveHiddenMember("m_vwJokeLayout", m_vwJokeLayout, getActivity());
 		ListAdapter adapter = m_vwJokeLayout.getAdapter();
 		JokeView jv = (JokeView)adapter.getView(0, null, null);
@@ -139,7 +140,6 @@ public class AdvancedJokeListTest2 extends ActivityInstrumentationTestCase2<Adva
 		assertTrue("Check Dislike Checked", m_vwDislikeButton2.isChecked());
 		assertTrue("Check Like Checked", m_vwLikeButton.isChecked());
 		assertTrue("Check Dislike Checked", m_vwDislikeButton2.isChecked());
-		*/
 }
 
 	/*************************************/
@@ -147,7 +147,6 @@ public class AdvancedJokeListTest2 extends ActivityInstrumentationTestCase2<Adva
 	/*************************************/
 	@SuppressWarnings("unchecked")
 	public <T> T retrieveHiddenMember(String memberName, T type, Object sourceObj) {
-		/*
 		Field field = null;
 		T returnVal = null;
 		//Test for proper existence
@@ -172,8 +171,7 @@ public class AdvancedJokeListTest2 extends ActivityInstrumentationTestCase2<Adva
 		} catch (IllegalAccessException e) {
 			fail ("This is an Error caused by the UnitTest!\n Improper user of retrieveHiddenMember(...) -- IllegalAccessException:\n Field.setAccessible(true) should be called.");
 		}
-		return returnVal; */
-		return null;
+		return returnVal;
 	}
 
 
